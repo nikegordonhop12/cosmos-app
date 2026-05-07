@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  
+  body {
+    background: #000;
+    color: #e8e0d0;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #0a0a1a; }
+  ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212,175,55,0.15);
+  }
+
+  .glass-dark {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(212,175,55,0.1);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 30px rgba(212,175,55,0.3), 0 0 60px rgba(212,175,55,0.1);
+  }
+
+  .glow-mystic {
+    box-shadow: 0 0 30px rgba(168,85,247,0.3), 0 0 60px rgba(168,85,247,0.1);
+  }
+
+  .glow-rune {
+    box-shadow: 0 0 30px rgba(74,158,255,0.3), 0 0 60px rgba(74,158,255,0.1);
+  }
+
+  .text-shimmer {
+    background: linear-gradient(90deg, #d4af37, #f0d060, #d4af37);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .btn-cosmic {
+    @apply px-6 py-3 glass glow-gold text-gold font-serif tracking-widest uppercase text-sm
+           transition-all duration-300 hover:bg-gold/10 hover:glow-gold cursor-pointer;
+  }
+
+  .card-mystic {
+    @apply glass rounded-2xl p-6 transition-all duration-500
+           hover:border-gold/30 hover:glow-gold;
+  }
+
+  .nav-link {
+    @apply text-silver/60 hover:text-gold transition-colors duration-300 
+           font-serif tracking-wider text-sm uppercase;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-serif font-light text-shimmer mb-2;
+  }
+
+  .section-subtitle {
+    @apply text-silver/50 font-serif italic text-lg;
+  }
+}
+
+/* Particle canvas */
+#particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Cosmic background */
+.cosmic-bg {
+  background: radial-gradient(ellipse at 20% 50%, rgba(26,10,46,0.8) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(10,26,46,0.6) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(15,15,46,0.9) 0%, transparent 70%),
+              #000;
+}
+
+/* Tarot card */
+.tarot-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.tarot-card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.tarot-card:hover .tarot-card-inner,
+.tarot-card.flipped .tarot-card-inner {
+  transform: rotateY(180deg);
+}
+
+.tarot-card-front,
+.tarot-card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%; height: 100%;
+}
+
+.tarot-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Chakra wheel */
+.chakra-ring {
+  animation: spin 20s linear infinite;
+}
+
+.chakra-ring:nth-child(2) { animation-duration: 15s; animation-direction: reverse; }
+.chakra-ring:nth-child(3) { animation-duration: 25s; }
+
+/* Rune glow */
+.rune-stone {
+  transition: all 0.3s ease;
+}
+
+.rune-stone:hover {
+  filter: drop-shadow(0 0 20px rgba(74,158,255,0.8));
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* Timeline */
+.timeline-node {
+  transition: all 0.3s ease;
+}
+
+.timeline-node:hover {
+  filter: drop-shadow(0 0 15px rgba(212,175,55,0.9));
+  transform: scale(1.2);
+}
+
+/* AI Chat */
+.ai-message {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Orbit system */
+.orbit-container {
+  position: relative;
+  width: 300px; height: 300px;
+}
+
+.planet-orbit {
+  position: absolute;
+  border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Sound wave */
+.sound-wave span {
+  display: inline-block;
+  width: 3px;
+  background: #d4af37;
+  border-radius: 2px;
+  animation: soundWave 1.2s ease-in-out infinite;
+}
+
+.sound-wave span:nth-child(2) { animation-delay: 0.1s; }
+.sound-wave span:nth-child(3) { animation-delay: 0.2s; }
+.sound-wave span:nth-child(4) { animation-delay: 0.3s; }
+.sound-wave span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes soundWave {
+  0%, 100% { height: 4px; }
+  50% { height: 20px; }
+}
