@@ -8,9 +8,9 @@ import type { NavItem } from '@/types'
 const PRIMARY_NAV: NavItem[] = [
   { path: '/',             label: 'Главная',      icon: '✦' },
   { path: '/chart',        label: 'Карта',        icon: '☽' },
+  { path: '/matrix',       label: 'Матрица',      icon: '✦' },
   { path: '/ai',           label: 'AI Астролог',  icon: '◈' },
   { path: '/cabinet',      label: 'Кабинет',      icon: '⊕' },
-  { path: '/cosmic',       label: 'Космос Live',  icon: '◉' },
   { path: '/tarot',        label: 'Таро',         icon: '⬡' },
 ]
 
